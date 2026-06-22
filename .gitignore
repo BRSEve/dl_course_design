@@ -9,4 +9,6 @@ wheels/
 # Virtual environments
 .venv
 
-paper
+paper/
+CCPD2019/
+runs

@@ -1,0 +1,478 @@
+(dl-course-design) ➜  dl_course_design git:(master) ✗ uv run python main.py
+[train] 已转换 20,000/90,105
+[train] 已转换 40,000/90,105
+[train] 已转换 60,000/90,105
+[train] 已转换 80,000/90,105
+[train] 已转换 90,105/90,105
+[val] 已转换 20,000/89,891
+[val] 已转换 40,000/89,891
+[val] 已转换 60,000/89,891
+[val] 已转换 80,000/89,891
+[val] 已转换 89,891/89,891
+[test] 已转换 20,000/20,000
+YOLO 数据集配置已生成: /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/ccpd.yaml
+数据量: {'train': 90105, 'val': 89891, 'test': 20000}
+Creating new Ultralytics Settings v0.0.6 file ✅ 
+View Ultralytics Settings with 'yolo settings' or at '/home/brseve/.config/Ultralytics/settings.json'
+Update Settings with 'yolo settings key=value', i.e. 'yolo settings runs_dir=path/to/dir'. For help see https://docs.ultralytics.com/quickstart/#ultralytics-settings.
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 1% ──────────── 56.0KB/5.3MB 158.6KB/s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 5% ╸─────────── 288.0KB/5.3MB 2.2MB/s 
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 22% ━━╸───────── 1.2/5.3MB 8.9MB/s 0.3
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 44% ━━━━━─────── 2.4/5.3MB 11.7MB/s 0.
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 72% ━━━━━━━━╸─── 3.8/5.3MB 14.1MB/s 0.
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 100% ━━━━━━━━━━━━ 5.3MB 8.7MB/s 0.6s
+Ultralytics 8.4.75 🚀 Python-3.11.15 torch-2.5.1+cu121 CUDA:0 (NVIDIA GeForce RTX 4060 Laptop GPU, 7834MiB)
+engine/trainer: agnostic_nms=False, amp=True, angle=1.0, augment=False, auto_augment=randaugment, batch=-1, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, cls_pw=0.0, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=/home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/ccpd.yaml, degrees=0.0, deterministic=True, device=None, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, end2end=None, epochs=200, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=640, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.01, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolo26n.pt, momentum=0.937, mosaic=1.0, multi_scale=0.0, name=yolo26n_ccpd, nbs=64, nms=False, opset=None, optimize=False, optimizer=auto, overlap_mask=True, patience=30, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=/home/brseve/project/jimei/dl_course_design/runs/license_plate, rect=False, resume=False, retina_masks=False, rle=1.0, save=True, save_conf=False, save_crop=False, save_dir=/home/brseve/project/jimei/dl_course_design/runs/license_plate/yolo26n_ccpd, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=42, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=8, workspace=None
+Downloading https://ultralytics.com/assets/Arial.ttf to '/home/brseve/.config/Ultralytics/Arial.ttf': 100% ━━━━━━━━━━━━ 755.1KB 10.6MB/s 0.1s
+Overriding model.yaml nc=80 with nc=1
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       464  ultralytics.nn.modules.conv.Conv             [3, 16, 3, 2]                 
+  1                  -1  1      4672  ultralytics.nn.modules.conv.Conv             [16, 32, 3, 2]                
+  2                  -1  1      6640  ultralytics.nn.modules.block.C3k2            [32, 64, 1, False, 0.25]      
+  3                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+  4                  -1  1     26080  ultralytics.nn.modules.block.C3k2            [64, 128, 1, False, 0.25]     
+  5                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+  6                  -1  1     87040  ultralytics.nn.modules.block.C3k2            [128, 128, 1, True]           
+  7                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  8                  -1  1    346112  ultralytics.nn.modules.block.C3k2            [256, 256, 1, True]           
+  9                  -1  1    164608  ultralytics.nn.modules.block.SPPF            [256, 256, 5, 3, True]        
+ 10                  -1  1    249728  ultralytics.nn.modules.block.C2PSA           [256, 256, 1]                 
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 13                  -1  1    119808  ultralytics.nn.modules.block.C3k2            [384, 128, 1, True]           
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 16                  -1  1     34304  ultralytics.nn.modules.block.C3k2            [256, 64, 1, True]            
+ 17                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+ 18            [-1, 13]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 19                  -1  1     95232  ultralytics.nn.modules.block.C3k2            [192, 128, 1, True]           
+ 20                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+ 21            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 22                  -1  1    463104  ultralytics.nn.modules.block.C3k2            [384, 256, 1, True, 0.5, True]
+ 23        [16, 19, 22]  1    241566  ultralytics.nn.modules.head.Detect           [1, 1, True, [64, 128, 256]]  
+YOLO26n summary: 260 layers, 2,504,190 parameters, 2,504,190 gradients, 5.8 GFLOPs
+
+Transferred 606/708 items from pretrained weights
+AMP: running Automatic Mixed Precision (AMP) checks...
+AMP: checks passed ✅
+train: Fast image access ✅ (ping: 0.0±0.0 ms, read: 145.4±84.5 MB/s, size: 60.1 KB)
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 284 images, 0 backgrounds, 0 corrupt: 0% 
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 767 images, 0 backgrounds, 0 corrupt: 0% 
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 1250 images, 0 backgrounds, 0 corrupt: 1%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 1703 images, 0 backgrounds, 0 corrupt: 1%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 2132 images, 0 backgrounds, 0 corrupt: 2%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 2545 images, 0 backgrounds, 0 corrupt: 2%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 3037 images, 0 backgrounds, 0 corrupt: 3%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 3531 images, 0 backgrounds, 0 corrupt: 3%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 4027 images, 0 backgrounds, 0 corrupt: 4%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 4517 images, 0 backgrounds, 0 corrupt: 5%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 5005 images, 0 backgrounds, 0 corrupt: 5%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 5489 images, 0 backgrounds, 0 corrupt: 6%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 5989 images, 0 backgrounds, 0 corrupt: 6%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 6475 images, 0 backgrounds, 0 corrupt: 7%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 6976 images, 0 backgrounds, 0 corrupt: 7%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 7471 images, 0 backgrounds, 0 corrupt: 8%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 7962 images, 0 backgrounds, 0 corrupt: 8%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 8449 images, 0 backgrounds, 0 corrupt: 9%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 8938 images, 0 backgrounds, 0 corrupt: 9%
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 9432 images, 0 backgrounds, 0 corrupt: 10
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 9924 images, 0 backgrounds, 0 corrupt: 11
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 10410 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 10893 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 11391 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 11890 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 12380 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 12830 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 13331 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 13827 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 14319 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 14809 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 15300 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 15796 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 16292 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 16777 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 17271 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 17755 images, 0 backgrounds, 0 corrupt: 1
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 18255 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 18751 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 19228 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 19623 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 20105 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 20584 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 21083 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 21573 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 22066 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 22559 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 23056 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 23534 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 24030 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 24410 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 24760 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 25262 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 25760 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 26245 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 26741 images, 0 backgrounds, 0 corrupt: 2
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 27226 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 27718 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 28209 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 28696 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 29187 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 29674 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 30172 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 30664 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 31153 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 31637 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 32134 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 32633 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 33121 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 33607 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 34013 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 34431 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 34865 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 35322 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 35718 images, 0 backgrounds, 0 corrupt: 3
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 36131 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 36469 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 36871 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 37299 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 37735 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 38140 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 38564 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 38972 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 39453 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 39950 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 40432 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 40889 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 41365 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 41838 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 42290 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 42747 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 43224 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 43694 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 44171 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 44643 images, 0 backgrounds, 0 corrupt: 4
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 45114 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 45607 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 46093 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 46589 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 47081 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 47562 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 48051 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 48549 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 49027 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 49521 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 49935 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 50331 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 50749 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 51217 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 51672 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 52132 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 52618 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 53110 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 53599 images, 0 backgrounds, 0 corrupt: 5
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 54079 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 54557 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 55051 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 55540 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 56022 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 56518 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 56991 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 57476 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 57951 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 58455 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 58938 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 59432 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 59913 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 60411 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 60902 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 61389 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 61880 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 62370 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 62740 images, 0 backgrounds, 0 corrupt: 6
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 63148 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 63548 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 63955 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 64364 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 64802 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 65257 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 65711 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 66179 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 66651 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 67138 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 67632 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 68114 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 68611 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 69099 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 69581 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 70074 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 70562 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 71033 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 71502 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 71985 images, 0 backgrounds, 0 corrupt: 7
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 72466 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 72949 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 73439 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 73925 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 74419 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 74902 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 75383 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 75858 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 76341 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 76831 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 77325 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 77804 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 78301 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 78801 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 79285 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 79782 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 80273 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 80738 images, 0 backgrounds, 0 corrupt: 8
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 81233 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 81730 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 82237 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 82754 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 83261 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 83759 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 84267 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 84770 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 85259 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 85761 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 86258 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 86759 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 87271 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 87765 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 88276 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 88789 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 89303 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 89820 images, 0 backgrounds, 0 corrupt: 9
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train... 90105 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 90105/90105 4.7Kit/s 19.0s
+train: New cache created: /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train.cache
+AutoBatch: Computing optimal batch size for imgsz=640 at 60.0% CUDA memory utilization.
+AutoBatch: CUDA:0 (NVIDIA GeForce RTX 4060 Laptop GPU) 7.65G total, 0.08G reserved, 0.06G allocated, 7.52G free
+      Params      GFLOPs  GPU_mem (GB)  forward (ms) backward (ms)                   input                  output
+     2504190       5.772         0.478          37.1           nan        (1, 3, 640, 640)                    list
+     2504190       11.54         0.981         22.44           nan        (2, 3, 640, 640)                    list
+     2504190       23.09         1.762          20.6           nan        (4, 3, 640, 640)                    list
+     2504190       46.17         3.265         20.19           nan        (8, 3, 640, 640)                    list
+     2504190       92.35         6.224         34.48           nan       (16, 3, 640, 640)                    list
+AutoBatch: Using batch-size 12 for CUDA:0 4.88G/7.65G (64%) ✅
+train: Fast image access ✅ (ping: 0.0±0.0 ms, read: 265.6±168.5 MB/s, size: 84.6 KB)
+train: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/train.cache... 90105 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 90105/90105 27.0Git/s 0.0s
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 273.9±96.5 MB/s, size: 78.6 KB)
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 239 images, 0 backgrounds, 0 corrupt: 0% ────
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 677 images, 0 backgrounds, 0 corrupt: 0% ────
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 1097 images, 0 backgrounds, 0 corrupt: 1% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 1556 images, 0 backgrounds, 0 corrupt: 1% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 2002 images, 0 backgrounds, 0 corrupt: 2% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 2404 images, 0 backgrounds, 0 corrupt: 2% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 2722 images, 0 backgrounds, 0 corrupt: 3% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 3100 images, 0 backgrounds, 0 corrupt: 3% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 3542 images, 0 backgrounds, 0 corrupt: 3% ───
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 3999 images, 0 backgrounds, 0 corrupt: 4% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 4479 images, 0 backgrounds, 0 corrupt: 4% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 4931 images, 0 backgrounds, 0 corrupt: 5% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 5401 images, 0 backgrounds, 0 corrupt: 6% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 5859 images, 0 backgrounds, 0 corrupt: 6% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 6317 images, 0 backgrounds, 0 corrupt: 7% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 6770 images, 0 backgrounds, 0 corrupt: 7% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 7203 images, 0 backgrounds, 0 corrupt: 8% ╸──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 7703 images, 0 backgrounds, 0 corrupt: 8% ━──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 8190 images, 0 backgrounds, 0 corrupt: 9% ━──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 8655 images, 0 backgrounds, 0 corrupt: 9% ━──
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 9123 images, 0 backgrounds, 0 corrupt: 10% ━─
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 9594 images, 0 backgrounds, 0 corrupt: 10% ━─
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 10070 images, 0 backgrounds, 0 corrupt: 11% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 10528 images, 0 backgrounds, 0 corrupt: 11% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 10995 images, 0 backgrounds, 0 corrupt: 12% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 11438 images, 0 backgrounds, 0 corrupt: 12% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 11860 images, 0 backgrounds, 0 corrupt: 13% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 12336 images, 0 backgrounds, 0 corrupt: 13% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 12836 images, 0 backgrounds, 0 corrupt: 14% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 13323 images, 0 backgrounds, 0 corrupt: 14% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 13794 images, 0 backgrounds, 0 corrupt: 15% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 14259 images, 0 backgrounds, 0 corrupt: 15% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 14725 images, 0 backgrounds, 0 corrupt: 16% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 15197 images, 0 backgrounds, 0 corrupt: 16% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 15678 images, 0 backgrounds, 0 corrupt: 17% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 16180 images, 0 backgrounds, 0 corrupt: 17% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 16643 images, 0 backgrounds, 0 corrupt: 18% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 17063 images, 0 backgrounds, 0 corrupt: 18% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 17548 images, 0 backgrounds, 0 corrupt: 19% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 18050 images, 0 backgrounds, 0 corrupt: 20% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 18558 images, 0 backgrounds, 0 corrupt: 20% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 19071 images, 0 backgrounds, 0 corrupt: 21% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 19561 images, 0 backgrounds, 0 corrupt: 21% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 20051 images, 0 backgrounds, 0 corrupt: 22% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 20560 images, 0 backgrounds, 0 corrupt: 22% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 21058 images, 0 backgrounds, 0 corrupt: 23% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 21558 images, 0 backgrounds, 0 corrupt: 23% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 22026 images, 0 backgrounds, 0 corrupt: 24% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 22489 images, 0 backgrounds, 0 corrupt: 25% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 22989 images, 0 backgrounds, 0 corrupt: 25% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 23494 images, 0 backgrounds, 0 corrupt: 26% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 23978 images, 0 backgrounds, 0 corrupt: 26% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 24481 images, 0 backgrounds, 0 corrupt: 27% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 24926 images, 0 backgrounds, 0 corrupt: 27% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 25266 images, 0 backgrounds, 0 corrupt: 28% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 25730 images, 0 backgrounds, 0 corrupt: 28% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 26204 images, 0 backgrounds, 0 corrupt: 29% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 26636 images, 0 backgrounds, 0 corrupt: 29% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 27051 images, 0 backgrounds, 0 corrupt: 30% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 27499 images, 0 backgrounds, 0 corrupt: 30% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 28001 images, 0 backgrounds, 0 corrupt: 31% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 28508 images, 0 backgrounds, 0 corrupt: 31% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 29006 images, 0 backgrounds, 0 corrupt: 32% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 29510 images, 0 backgrounds, 0 corrupt: 32% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 29871 images, 0 backgrounds, 0 corrupt: 33% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 30300 images, 0 backgrounds, 0 corrupt: 33% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 30779 images, 0 backgrounds, 0 corrupt: 34% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 31265 images, 0 backgrounds, 0 corrupt: 34% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 31731 images, 0 backgrounds, 0 corrupt: 35% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 32165 images, 0 backgrounds, 0 corrupt: 35% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 32612 images, 0 backgrounds, 0 corrupt: 36% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 33072 images, 0 backgrounds, 0 corrupt: 36% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 33528 images, 0 backgrounds, 0 corrupt: 37% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 34002 images, 0 backgrounds, 0 corrupt: 37% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 34463 images, 0 backgrounds, 0 corrupt: 38% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 34956 images, 0 backgrounds, 0 corrupt: 38% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 35383 images, 0 backgrounds, 0 corrupt: 39% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 35759 images, 0 backgrounds, 0 corrupt: 39% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 36165 images, 0 backgrounds, 0 corrupt: 40% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 36612 images, 0 backgrounds, 0 corrupt: 40% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 37061 images, 0 backgrounds, 0 corrupt: 41% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 37534 images, 0 backgrounds, 0 corrupt: 41% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 38000 images, 0 backgrounds, 0 corrupt: 42% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 38446 images, 0 backgrounds, 0 corrupt: 42% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 38867 images, 0 backgrounds, 0 corrupt: 43% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 39311 images, 0 backgrounds, 0 corrupt: 43% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 39750 images, 0 backgrounds, 0 corrupt: 44% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 40212 images, 0 backgrounds, 0 corrupt: 44% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 40698 images, 0 backgrounds, 0 corrupt: 45% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 41166 images, 0 backgrounds, 0 corrupt: 45% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 41626 images, 0 backgrounds, 0 corrupt: 46% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 42079 images, 0 backgrounds, 0 corrupt: 46% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 42560 images, 0 backgrounds, 0 corrupt: 47% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 43071 images, 0 backgrounds, 0 corrupt: 47% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 43586 images, 0 backgrounds, 0 corrupt: 48% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 44108 images, 0 backgrounds, 0 corrupt: 49% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 44620 images, 0 backgrounds, 0 corrupt: 49% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 45133 images, 0 backgrounds, 0 corrupt: 50% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 45522 images, 0 backgrounds, 0 corrupt: 50% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 46022 images, 0 backgrounds, 0 corrupt: 51% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 46510 images, 0 backgrounds, 0 corrupt: 51% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 46948 images, 0 backgrounds, 0 corrupt: 52% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 47411 images, 0 backgrounds, 0 corrupt: 52% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 47926 images, 0 backgrounds, 0 corrupt: 53% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 48438 images, 0 backgrounds, 0 corrupt: 53% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 48884 images, 0 backgrounds, 0 corrupt: 54% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 49309 images, 0 backgrounds, 0 corrupt: 54% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 49749 images, 0 backgrounds, 0 corrupt: 55% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 50200 images, 0 backgrounds, 0 corrupt: 55% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 50649 images, 0 backgrounds, 0 corrupt: 56% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 51096 images, 0 backgrounds, 0 corrupt: 56% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 51554 images, 0 backgrounds, 0 corrupt: 57% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 52011 images, 0 backgrounds, 0 corrupt: 57% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 52491 images, 0 backgrounds, 0 corrupt: 58% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 53010 images, 0 backgrounds, 0 corrupt: 58% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 53470 images, 0 backgrounds, 0 corrupt: 59% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 53903 images, 0 backgrounds, 0 corrupt: 59% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 54379 images, 0 backgrounds, 0 corrupt: 60% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 54846 images, 0 backgrounds, 0 corrupt: 61% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 55323 images, 0 backgrounds, 0 corrupt: 61% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 55798 images, 0 backgrounds, 0 corrupt: 62% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 56292 images, 0 backgrounds, 0 corrupt: 62% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 56746 images, 0 backgrounds, 0 corrupt: 63% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 57113 images, 0 backgrounds, 0 corrupt: 63% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 57543 images, 0 backgrounds, 0 corrupt: 64% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 57986 images, 0 backgrounds, 0 corrupt: 64% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 58493 images, 0 backgrounds, 0 corrupt: 65% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 58999 images, 0 backgrounds, 0 corrupt: 65% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 59509 images, 0 backgrounds, 0 corrupt: 66% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 59978 images, 0 backgrounds, 0 corrupt: 66% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 60334 images, 0 backgrounds, 0 corrupt: 67% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 60688 images, 0 backgrounds, 0 corrupt: 67% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 61175 images, 0 backgrounds, 0 corrupt: 68% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 61569 images, 0 backgrounds, 0 corrupt: 68% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 62017 images, 0 backgrounds, 0 corrupt: 68% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 62480 images, 0 backgrounds, 0 corrupt: 69% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 62949 images, 0 backgrounds, 0 corrupt: 70% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 63395 images, 0 backgrounds, 0 corrupt: 70% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 63888 images, 0 backgrounds, 0 corrupt: 71% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 64262 images, 0 backgrounds, 0 corrupt: 71% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 64718 images, 0 backgrounds, 0 corrupt: 71% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 65229 images, 0 backgrounds, 0 corrupt: 72% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 65734 images, 0 backgrounds, 0 corrupt: 73% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 66235 images, 0 backgrounds, 0 corrupt: 73% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 66722 images, 0 backgrounds, 0 corrupt: 74% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 67182 images, 0 backgrounds, 0 corrupt: 74% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 67688 images, 0 backgrounds, 0 corrupt: 75% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 68193 images, 0 backgrounds, 0 corrupt: 75% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 68700 images, 0 backgrounds, 0 corrupt: 76% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 69210 images, 0 backgrounds, 0 corrupt: 76% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 69675 images, 0 backgrounds, 0 corrupt: 77% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 70045 images, 0 backgrounds, 0 corrupt: 77% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 70551 images, 0 backgrounds, 0 corrupt: 78% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 71066 images, 0 backgrounds, 0 corrupt: 79% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 71569 images, 0 backgrounds, 0 corrupt: 79% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 72009 images, 0 backgrounds, 0 corrupt: 80% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 72494 images, 0 backgrounds, 0 corrupt: 80% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 72985 images, 0 backgrounds, 0 corrupt: 81% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 73496 images, 0 backgrounds, 0 corrupt: 81% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 73985 images, 0 backgrounds, 0 corrupt: 82% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 74489 images, 0 backgrounds, 0 corrupt: 82% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 74994 images, 0 backgrounds, 0 corrupt: 83% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 75484 images, 0 backgrounds, 0 corrupt: 83% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 75988 images, 0 backgrounds, 0 corrupt: 84% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 76485 images, 0 backgrounds, 0 corrupt: 85% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 76965 images, 0 backgrounds, 0 corrupt: 85% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 77437 images, 0 backgrounds, 0 corrupt: 86% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 77907 images, 0 backgrounds, 0 corrupt: 86% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 78192 images, 0 backgrounds, 0 corrupt: 86% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 78685 images, 0 backgrounds, 0 corrupt: 87% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 79179 images, 0 backgrounds, 0 corrupt: 88% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 79681 images, 0 backgrounds, 0 corrupt: 88% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 80168 images, 0 backgrounds, 0 corrupt: 89% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 80632 images, 0 backgrounds, 0 corrupt: 89% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 81123 images, 0 backgrounds, 0 corrupt: 90% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 81619 images, 0 backgrounds, 0 corrupt: 90% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 82091 images, 0 backgrounds, 0 corrupt: 91% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 82542 images, 0 backgrounds, 0 corrupt: 91% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 83035 images, 0 backgrounds, 0 corrupt: 92% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 83537 images, 0 backgrounds, 0 corrupt: 92% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 84030 images, 0 backgrounds, 0 corrupt: 93% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 84526 images, 0 backgrounds, 0 corrupt: 94% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 85018 images, 0 backgrounds, 0 corrupt: 94% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 85516 images, 0 backgrounds, 0 corrupt: 95% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 86005 images, 0 backgrounds, 0 corrupt: 95% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 86516 images, 0 backgrounds, 0 corrupt: 96% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 87029 images, 0 backgrounds, 0 corrupt: 96% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 87516 images, 0 backgrounds, 0 corrupt: 97% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 87966 images, 0 backgrounds, 0 corrupt: 97% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 88474 images, 0 backgrounds, 0 corrupt: 98% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 88968 images, 0 backgrounds, 0 corrupt: 98% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 89481 images, 0 backgrounds, 0 corrupt: 99% ━
+val: Scanning /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val... 89891 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 89891/89891 4.6Kit/s 19.4s
+val: New cache created: /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val.cache
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: MuSGD(lr=0.01, momentum=0.9) with parameter groups 114 weight(decay=0.0), 126 weight(decay=0.00046875), 126 bias(decay=0.0)
+Plotting labels to /home/brseve/project/jimei/dl_course_design/runs/license_plate/yolo26n_ccpd/labels.jpg... 
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to /home/brseve/project/jimei/dl_course_design/runs/license_plate/yolo26n_ccpd
+Starting training for 200 epochs...
+
+```
+val: New cache created: /home/brseve/project/jimei/dl_course_design/CCPD2019/yolo_ccpd_base/labels/val.cache
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: MuSGD(lr=0.01, momentum=0.9) with parameter groups 114 weight(decay=0.0), 126 weight(decay=0.00046875), 126 bias(decay=0.0)
+Plotting labels to /home/brseve/project/jimei/dl_course_design/runs/license_plate/yolo26n_ccpd/labels.jpg... 
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to /home/brseve/project/jimei/dl_course_design/runs/license_plate/yolo26n_ccpd
+Starting training for 200 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      1/200      1.95G      1.068      3.377   0.006034         27        640: 19% ━━────────── 1444/7509 4.7it/s 5:30<21:39
+```
+目前大概要跑多久，loss 是否正常？
