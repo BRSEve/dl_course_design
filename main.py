@@ -24,6 +24,7 @@ SPLITS_DIR = CCPD_ROOT / "splits"
 YOLO_DATASET = CCPD_ROOT / "yolo_ccpd_base"
 RUNS_DIR = ROOT / "runs" / "license_plate"
 EXPORTED_WEIGHTS = ROOT / "weights" / "yolo26n_ccpd_best.pt"
+VAL_LIMIT = 10_000
 
 
 def jpeg_size(path: Path) -> tuple[int, int]:
@@ -170,18 +171,21 @@ def prepare_dataset(test_ratio: float, seed: int) -> Path:
         raise FileNotFoundError(f"缺少 CCPD 图片目录: {SOURCE_IMAGES}")
 
     train = read_official_split("train")
-    val = read_official_split("val")
-    overlap = set(train).intersection(val)
+    official_val = read_official_split("val")
+    overlap = set(train).intersection(official_val)
     if overlap:
         raise ValueError(f"官方 train/val 存在 {len(overlap)} 张重复图片")
 
-    all_images = train + val
+    val = official_val[:VAL_LIMIT]
+    all_images = train + official_val
     test_count = max(1, round(len(all_images) * test_ratio))
-    test_set = set(random.Random(seed).sample(all_images, test_count))
-    # The two official lists cover ccpd_base, so carve test out to prevent leakage.
+    # Protect the requested validation subset and sample test from the remaining
+    # ccpd_base images. Any sampled official-train images are removed from train.
+    test_candidates = sorted(set(all_images).difference(val))
+    test_set = set(random.Random(seed).sample(test_candidates, test_count))
     splits = {
         "train": [image for image in train if image not in test_set],
-        "val": [image for image in val if image not in test_set],
+        "val": val,
         "test": sorted(test_set),
     }
     for name, images in splits.items():
@@ -256,10 +260,10 @@ def train(args: argparse.Namespace, dataset_yaml: Path) -> Path:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", default="yolo26n.pt", help="预训练权重")
-    parser.add_argument("--epochs", type=int, default=200)
-    parser.add_argument("--patience", type=int, default=30)
+    parser.add_argument("--epochs", type=int, default=30)
+    parser.add_argument("--patience", type=int, default=10)
     parser.add_argument("--imgsz", type=int, default=640)
-    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--device", default=None, help="例如 0、cpu；默认自动选择")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--test-ratio", type=float, default=0.1)
