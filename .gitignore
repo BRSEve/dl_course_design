@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
-paper/
-CCPD2019/
+paper
+CCPD2019
 runs
+
+YOLO_OCR_Res.zip
+YOLO_Train_Test_Res.zip
