@@ -1,27 +1,31 @@
-"""Evaluate license plate detection and OCR on the university_plates dataset.
+"""Evaluate license plate detection and OCR on supported plate datasets.
 
 Pipeline:
 
 1. Load ``weights/yolo26n_ccpd_best.pt``.
-2. Run YOLO on four university_plates subsets:
+2. Run YOLO on one selected dataset:
+   * university_plates
+   * CCPD2019/yolo_ccpd_base/images/test
+   * Cars_1999/Cars_1999/cars_markus
+3. Crop every detected plate box and recognize it with PaddleOCR
+   TextRecognition.
+4. Save annotated images, per-image CSV results, and metrics.
+
+For university_plates, results are grouped by:
    * plates
    * night_plates
    * multi_plates
    * upward_downward_plates
-3. Crop every detected plate box and recognize it with PaddleOCR
-   TextRecognition.
-4. Save annotated images, per-image CSV results, and metrics.
 
 The accuracy metrics stay the same as before:
 
 * Full Match Accuracy
 * Character-level Accuracy
 
-The university_plates image filenames do not contain ground-truth plate
-numbers, and no annotation file is currently present in the dataset directory.
-Therefore the script always reports detection/OCR outputs, and computes the two
-accuracy metrics only when ground truth is available through ``--truth-csv`` or
-CCPD-style filenames.
+CCPD filenames contain ground-truth plate numbers, so the two accuracy metrics
+are computed automatically for CCPD.  university_plates and Cars_1999 do not
+ship with plate text labels in this workspace, so they report detection/OCR
+outputs and compute OCR accuracy only when ``--truth-csv`` is provided.
 """
 
 from __future__ import annotations
@@ -40,10 +44,13 @@ from typing import Any, Iterable
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_WEIGHTS = ROOT / "weights" / "yolo26n_ccpd_best.pt"
-DEFAULT_DATASET_ROOT = ROOT / "university_plates"
-DEFAULT_OUTPUT = ROOT / "runs" / "plate_ocr_eval" / "university_plates"
+DEFAULT_UNIVERSITY_ROOT = ROOT / "university_plates"
+DEFAULT_CCPD_TEST_ROOT = ROOT / "CCPD2019" / "yolo_ccpd_base" / "images" / "test"
+DEFAULT_CARS_ROOT = ROOT / "Cars_1999" / "Cars_1999" / "cars_markus"
+DEFAULT_OUTPUT_ROOT = ROOT / "runs" / "plate_ocr_eval"
 DEFAULT_FONT = Path("/usr/share/fonts/adobe-source-han-sans/SourceHanSansCN-Regular.otf")
-SUBSETS = ("plates", "night_plates", "multi_plates", "upward_downward_plates")
+UNIVERSITY_SUBSETS = ("plates", "night_plates", "multi_plates", "upward_downward_plates")
+DATASET_CHOICES = ("university", "ccpd", "cars")
 
 PROVINCES = [
     "皖",
@@ -178,17 +185,22 @@ def require_cv2() -> Any:
     return cv2
 
 
-def normalize_plate(text: str) -> str:
+def normalize_plate(text: str, allow_chinese: bool = True) -> str:
     text = unicodedata.normalize("NFKC", text).upper()
-    return "".join(re.findall(r"[\u4e00-\u9fffA-Z0-9]", text))
+    pattern = r"[\u4e00-\u9fffA-Z0-9]" if allow_chinese else r"[A-Z0-9]"
+    return "".join(re.findall(pattern, text))
 
 
-def split_plate_text(value: str) -> list[str]:
+def split_plate_text(value: str, allow_chinese: bool = True) -> list[str]:
     """Split one or more plate numbers from CSV text."""
     if not value:
         return []
     values = re.split(r"[|,，;；\s]+", value.strip())
-    return [normalized for item in values if (normalized := normalize_plate(item))]
+    return [
+        normalized
+        for item in values
+        if (normalized := normalize_plate(item, allow_chinese=allow_chinese))
+    ]
 
 
 def decode_ccpd_plate_from_filename(path: Path) -> list[str]:
@@ -377,7 +389,7 @@ def extract_texts_from_ocr_result(result: Any) -> list[tuple[str, float]]:
     return [(text, score) for text, score in texts if normalize_plate(text)]
 
 
-def recognize_crop(ocr: Any, crop_bgr: Any) -> str:
+def recognize_crop(ocr: Any, crop_bgr: Any, allow_chinese: bool) -> str:
     if crop_bgr.size == 0:
         return ""
 
@@ -400,7 +412,9 @@ def recognize_crop(ocr: Any, crop_bgr: Any) -> str:
         candidates.extend(extract_texts_from_ocr_result(result))
     if not candidates:
         return ""
-    return normalize_plate("".join(text for text, _score in candidates))
+    return normalize_plate(
+        "".join(text for text, _score in candidates), allow_chinese=allow_chinese
+    )
 
 
 def clip_box(
@@ -540,7 +554,15 @@ def draw_annotations(
         return canvas
 
 
-def list_dataset_images(
+def image_files(directory: Path) -> list[Path]:
+    return sorted(
+        path
+        for path in directory.iterdir()
+        if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp"}
+    )
+
+
+def list_university_images(
     dataset_root: Path, selected_subsets: list[str], limit: int | None
 ) -> list[DatasetImage]:
     if not dataset_root.is_dir():
@@ -551,11 +573,7 @@ def list_dataset_images(
         subset_dir = dataset_root / subset
         if not subset_dir.is_dir():
             raise FileNotFoundError(f"缺少子集目录: {subset_dir}")
-        subset_images = sorted(
-            path
-            for path in subset_dir.iterdir()
-            if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp"}
-        )
+        subset_images = image_files(subset_dir)
         if limit is not None:
             subset_images = subset_images[:limit]
         images.extend(DatasetImage(path=path, subset=subset) for path in subset_images)
@@ -564,7 +582,30 @@ def list_dataset_images(
     return images
 
 
-def load_truth_csv(path: Path | None, dataset_root: Path) -> dict[str, list[str]]:
+def list_flat_images(dataset_root: Path, subset: str, limit: int | None) -> list[DatasetImage]:
+    if not dataset_root.is_dir():
+        raise FileNotFoundError(f"测试集目录不存在: {dataset_root}")
+    paths = image_files(dataset_root)
+    if limit is not None:
+        paths = paths[:limit]
+    if not paths:
+        raise FileNotFoundError(f"测试集中没有图片: {dataset_root}")
+    return [DatasetImage(path=path, subset=subset) for path in paths]
+
+
+def list_dataset_images(args: argparse.Namespace) -> list[DatasetImage]:
+    if args.dataset == "university":
+        return list_university_images(args.dataset_root, args.subsets, args.limit)
+    if args.dataset == "ccpd":
+        return list_flat_images(args.dataset_root, "ccpd_test", args.limit)
+    if args.dataset == "cars":
+        return list_flat_images(args.dataset_root, "cars_markus", args.limit)
+    raise ValueError(f"不支持的数据集: {args.dataset}")
+
+
+def load_truth_csv(
+    path: Path | None, dataset_root: Path, allow_chinese: bool
+) -> dict[str, list[str]]:
     """Load optional GT labels.
 
     Accepted columns:
@@ -607,7 +648,9 @@ def load_truth_csv(path: Path | None, dataset_root: Path) -> dict[str, list[str]
             )
         for row in reader:
             image_value = row.get(image_column, "").strip().replace("\\", "/")
-            plates = split_plate_text(row.get(plate_column, ""))
+            plates = split_plate_text(
+                row.get(plate_column, ""), allow_chinese=allow_chinese
+            )
             if not image_value or not plates:
                 continue
             truth[image_value] = plates
@@ -704,19 +747,23 @@ def write_predictions_csv(results: list[ImageResult], output_dir: Path) -> None:
             )
 
 
-def write_metrics(results: list[ImageResult], output_dir: Path) -> dict[str, Any]:
+def write_metrics(
+    results: list[ImageResult], output_dir: Path, subset_names: list[str], dataset: str
+) -> dict[str, Any]:
     by_subset = {
         subset: result_metrics(
             [result for result in results if result.subset == subset]
         )
-        for subset in SUBSETS
+        for subset in subset_names
     }
     metrics = {
+        "dataset": dataset,
         "overall": result_metrics(results),
         "by_subset": by_subset,
         "note": (
             "Full Match Accuracy 和 Character-level Accuracy 只有在存在真值车牌号"
-            "时计算；当前 university_plates 默认文件名不含真值。"
+            "时计算；CCPD 文件名可自动提供真值，university_plates 和 "
+            "Cars_1999 默认无车牌字符真值。"
         ),
     }
     (output_dir / "metrics.json").write_text(
@@ -764,8 +811,12 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     except ImportError as error:
         raise RuntimeError("缺少 ultralytics，请先执行 `uv sync` 安装依赖") from error
 
-    dataset_images = list_dataset_images(args.dataset_root, args.subsets, args.limit)
-    truth = load_truth_csv(args.truth_csv, args.dataset_root)
+    dataset_images = list_dataset_images(args)
+    subset_names = list(dict.fromkeys(item.subset for item in dataset_images))
+    allow_chinese = args.plate_region != "us"
+    truth = load_truth_csv(
+        args.truth_csv, args.dataset_root, allow_chinese=allow_chinese
+    )
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     annotated_root = args.output_dir / "annotated"
@@ -814,7 +865,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                 )
                 x1, y1, x2, y2 = box
                 crop = image[y1:y2, x1:x2]
-                pred = recognize_crop(ocr, crop)
+                pred = recognize_crop(ocr, crop, allow_chinese=allow_chinese)
                 detections.append(
                     PlateDetection(pred=pred, confidence=confidence, box_xyxy=box)
                 )
@@ -856,7 +907,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         )
 
     write_predictions_csv(results, args.output_dir)
-    metrics = write_metrics(results, args.output_dir)
+    metrics = write_metrics(results, args.output_dir, subset_names, args.dataset)
     print_subset_summary(metrics)
     print(
         "\n关键输出\n"
@@ -878,17 +929,33 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Evaluate university_plates with YOLO detection + PaddleOCR OCR."
+        description="Evaluate YOLO plate detection + PaddleOCR OCR on supported datasets."
     )
     parser.add_argument("--weights", type=Path, default=DEFAULT_WEIGHTS)
-    parser.add_argument("--dataset-root", type=Path, default=DEFAULT_DATASET_ROOT)
-    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--dataset",
+        choices=DATASET_CHOICES,
+        default="university",
+        help="测试集类型：university、ccpd 或 cars",
+    )
+    parser.add_argument(
+        "--dataset-root",
+        type=Path,
+        default=None,
+        help="测试集根目录；默认随 --dataset 自动选择",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="输出目录；默认写入 runs/plate_ocr_eval/<dataset>",
+    )
     parser.add_argument(
         "--subsets",
         nargs="+",
-        default=list(SUBSETS),
-        choices=SUBSETS,
-        help="要评估的 university_plates 子集",
+        default=list(UNIVERSITY_SUBSETS),
+        choices=UNIVERSITY_SUBSETS,
+        help="要评估的 university_plates 子集；仅 --dataset university 生效",
     )
     parser.add_argument(
         "--truth-csv",
@@ -904,6 +971,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-det", type=int, default=10, help="每张图最多检测几个车牌")
     parser.add_argument("--device", default=None, help="YOLO 推理设备，例如 0 或 cpu")
     parser.add_argument("--ocr-device", default=None, help="PaddleOCR 设备，例如 gpu:0 或 cpu")
+    parser.add_argument(
+        "--plate-region",
+        choices=("auto", "cn", "us"),
+        default="auto",
+        help="车牌字符归一化区域；cars 默认 us，其它默认 cn",
+    )
     parser.add_argument("--crop-expand", type=float, default=0.05, help="裁剪框外扩比例")
     parser.add_argument(
         "--font",
@@ -920,6 +993,22 @@ def parse_args() -> argparse.Namespace:
     )
     parser.set_defaults(save_annotated=True)
     args = parser.parse_args()
+    default_roots = {
+        "university": DEFAULT_UNIVERSITY_ROOT,
+        "ccpd": DEFAULT_CCPD_TEST_ROOT,
+        "cars": DEFAULT_CARS_ROOT,
+    }
+    if args.dataset_root is None:
+        args.dataset_root = default_roots[args.dataset]
+    if args.output_dir is None:
+        output_name = {
+            "university": "university_plates",
+            "ccpd": "ccpd_test",
+            "cars": "cars_1999",
+        }[args.dataset]
+        args.output_dir = DEFAULT_OUTPUT_ROOT / output_name
+    if args.plate_region == "auto":
+        args.plate_region = "us" if args.dataset == "cars" else "cn"
     if args.limit is not None and args.limit <= 0:
         raise ValueError("--limit 必须为正整数")
     if args.max_det <= 0:
